@@ -11,11 +11,9 @@ import (
 
 	"github.com/go-chi/chi"
 	_ "github.com/lib/pq"
-	"github.com/volatiletech/sqlboiler/boil"
 )
 
 func main() {
-
 	cfg, err := config.ParseConfigFile("config.json")
 	if err != nil {
 		panic(err)
@@ -44,8 +42,10 @@ func main() {
 	}
 	fmt.Println("connected")
 
-	boil.SetDB(db)
 	r := chi.NewRouter()
+
+	fs := http.FileServer(http.Dir("./views/"))
+	r.Handle("/", http.StripPrefix("", fs))
 
 	auth.New(db, r)
 
