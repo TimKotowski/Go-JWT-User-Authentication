@@ -1,0 +1,8 @@
+[psql]
+  dbname = "gojwt"
+  host   = "localhost"
+  port   = 5432
+  user   = "timkotowski"
+  password   = "butter333"
+  sslmode = "disable"
+  blacklist = ["migrations", "other"]
